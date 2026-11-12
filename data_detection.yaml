@@ -1,0 +1,6 @@
+path: data/dataset_detection
+train: images/train
+val: images/val
+
+names:
+0: candy

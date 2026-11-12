@@ -1,0 +1,19 @@
+Résumé du Projet ACS (Automatic Candy Selector)
+1. Préparation des données (Data Pipeline)
+Extraction : Nous avons écrit un script Python (extract_frames.py) pour couper automatiquement des vidéos en images et les redimensionner en format standard (256×256 pixels).
+Organisation : Nous avons créé un script (split_dataset.py) pour mélanger les photos et diviser le jeu de données en deux parties : 80% pour l'entraînement (Train) et 20% pour l'évaluation (Test).
+2. Entraînement et Comparaison des modèles (Tâche 1 : Classification)
+Nous avons testé plusieurs architectures de Deep Learning pour identifier le type et la couleur du bonbon sur fond blanc :
+VGG-16 : Trop lourd et précision faible (~74%).
+MobileNetV3 : Très léger et rapide (~93%).
+ResNet-18 & ResNet-50 : Excellents résultats, stables et rapides (~93% à 99%).
+Vision Transformer (ViT) : Très précis (~98%), mais plus lourd et gourmand en mémoire.
+Optimisation : Nous avons ajouté des techniques de Data Augmentation (rotation, retournement, ajustement de la lumière) et de régularisation (weight_decay, AdamW) pour éviter le surapprentissage (overfitting).
+3. Évaluation scientifique
+Nous avons généré une matrice de confusion (Confusion Matrix) et un rapport complet (Precision, Recall, F1-score) avec scikit-learn et seaborn pour analyser les erreurs du modèle (par exemple, la confusion entre deux bonbons jaunes).
+Ces résultats sont prêts à être intégrés dans le rapport final du projet.
+4. Architecture globale choisie (Approche Cascade)
+Pour résoudre la tâche 2 (Détection d'objets sur fond complexe), nous avons choisi une approche en deux étapes :
+Étape 1 (Détecteur) : Le modèle RT-DETR localise les bonbons sur l'image et découpe chaque zone.
+Étape 2 (Classifieur) : Le modèle ResNet-18 identifie précisément le nom et la couleur de chaque bonbon découpé.
+👉 Prochaine étape : Finaliser le script de test complet sur Python, puis exporter le modèle en format ONNX pour l'intégrer dans l'application Java.
